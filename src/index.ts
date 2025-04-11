@@ -1,19 +1,23 @@
-export interface Env {
+import { Hono } from 'hono';
+
+interface Env {
   AI: Ai;
 }
 
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url);
+const app = new Hono<{ Bindings: Env }>();
 
-    if (url.pathname === '/test') {
-      return new Response('Test endpoint is working!');
-    }
+// Test endpoint
+app.get('/test', (c) => {
+  return c.text('Test endpoint is working!');
+});
 
-    const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-      prompt: "What is the origin of the phrase 'Hello, World'?",
-    });
+// AI endpoint
+app.post('/', async (c) => {
+  const response = await c.env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+    prompt: "What is the origin of the phrase 'Hello, World'?",
+  });
 
-    return new Response(JSON.stringify(response));
-  },
-};
+  return c.json(response);
+});
+
+export default app;
