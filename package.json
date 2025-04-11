@@ -4,8 +4,7 @@
   "main": "src/index.ts",
   "dependencies": {
     "hono": "^4",
-    "wrangler": "^4",
-    "workers-ai": "^1.0.0"
+    "wrangler": "^4"
   },
   "scripts": {
     "start": "wrangler dev",
