@@ -10,12 +10,12 @@ export default {
       return new Response('Test endpoint is working!');
     }
 
-    const userMessage = await request.text();
+    // const userMessage = await request.text();
 
-    const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-      prompt: userMessage,
-    });
+    // const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+    //   prompt: userMessage,
+    // });
 
-    return new Response(JSON.stringify(response));
+    return new Response('AI functionality is temporarily disabled.');
   },
 };
