@@ -10,12 +10,10 @@ export default {
       return new Response('Test endpoint is working!');
     }
 
-    // const userMessage = await request.text();
+    const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+      prompt: "What is the origin of the phrase 'Hello, World'?",
+    });
 
-    // const response = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
-    //   prompt: userMessage,
-    // });
-
-    return new Response('AI functionality is temporarily disabled.');
+    return new Response(JSON.stringify(response));
   },
 };
